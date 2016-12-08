@@ -7,4 +7,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    // image and title
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        //image
+        <ImageView
+            android:id="@+id/ArticleView_ImageView"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/android_logo" />
+        //title
+        <TextView
+            android:id="@+id/ArticleViewTitle_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Title of article "
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        //article text
+        <TextView
+            android:id="@+id/ArticleViewContent_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" This is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articlevThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articleThis is the text of the articlev"
+            />
+    </ScrollView>
+
+
 </LinearLayout>
