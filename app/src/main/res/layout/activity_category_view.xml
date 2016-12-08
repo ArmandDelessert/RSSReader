@@ -18,4 +18,17 @@
         android:layout_height="wrap_content"
         android:text="Go to FeedActivity!" />
 
+    <Button
+        android:id="@+id/launchParsing_Buttton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lanch parsing!"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    <!--
+        <ExpandableListView
+            android:id="@+id/categoryExpandableListView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+    -->
 </RelativeLayout>
