@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_feed_view"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    //toolbar
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/goToArticleActivityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go to Article activity!" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </ListView>
 
 </LinearLayout>
