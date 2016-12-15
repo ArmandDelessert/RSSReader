@@ -18,7 +18,29 @@ public class Article {
     }
 
 
+    public String getTitle() {
+        return Title;
+    }
 
+    public String getContent() {
+        return Content;
+    }
 
+    public String getPicturePath() {
+        return picturePath;
+    }
 
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setContent(String content) {
+        Content = content;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
 }
+
+
