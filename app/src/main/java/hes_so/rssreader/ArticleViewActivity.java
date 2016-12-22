@@ -1,5 +1,6 @@
 package hes_so.rssreader;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static hes_so.rssreader.R.drawable.rss_logo;
+
 /**
  * Created by HP on 01.12.2016.
  */
@@ -19,6 +22,8 @@ public class ArticleViewActivity extends AppCompatActivity {
     ImageView ArticleView_ImageView;
     TextView ArticleViewTitle_TextView;
     TextView ArticleViewContent_TextView;
+
+    Article currentArticle;
 
 
     @Override
@@ -32,12 +37,24 @@ public class ArticleViewActivity extends AppCompatActivity {
         //add return button to menu bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        currentArticle = new Article("article bidon", "text bidon","image/image");
 
         // link view to xml
         ArticleView_ImageView = (ImageView) findViewById(R.id.ArticleView_ImageView);
         ArticleViewTitle_TextView = (TextView) findViewById(R.id.ArticleViewTitle_TextView);
         ArticleViewContent_TextView = (TextView) findViewById(R.id.ArticleViewContent_TextView);
+
+        //add current article data to view
+        ArticleViewTitle_TextView.setText(currentArticle.getTitle());
+        ArticleViewContent_TextView.setText(currentArticle.getContent());
+
+        // fileNotFound exception
+        String picPath = currentArticle.getPicturePath();
+        Drawable image = Drawable.createFromPath(picPath);
+        if(image == null){
+            image.;
+        }
+        ArticleView_ImageView.setImageDrawable(image);
 
     }
 

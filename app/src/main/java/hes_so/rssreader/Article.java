@@ -1,11 +1,13 @@
 package hes_so.rssreader;
 
+import java.io.Serializable;
+
 /**
  * Created by edward on 12/8/2016.
  *
  */
 
-public class Article {
+public class Article implements Serializable {
 
     String Title;
     String Content;
