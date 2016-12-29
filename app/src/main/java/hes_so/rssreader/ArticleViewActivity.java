@@ -21,9 +21,11 @@ public class ArticleViewActivity extends AppCompatActivity {
     private RssItem rssItem;
 
     // Attributs de la vue
-    private ImageView articlePicture_ImageView;
-    private TextView articleTitle_TextView;
-    private TextView articleDescription_TextView;
+    private ImageView picture_ImageView;
+    private TextView title_TextView;
+    private TextView description_TextView;
+
+    Article currentArticle;
 
 
     @Override
@@ -45,13 +47,13 @@ public class ArticleViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Link view to xml
-        articlePicture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
-        articleTitle_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
-        articleDescription_TextView = (TextView) findViewById(R.id.articleView_description_TextView);
+        picture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
+        title_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
+        description_TextView = (TextView) findViewById(R.id.articleView_description_TextView);
 
         // Affichage de l'article
-        articleTitle_TextView.setText(this.rssItem.getTitle());
-        articleDescription_TextView.setText(this.rssItem.getDescription());
+        title_TextView.setText(this.rssItem.getTitle());
+        description_TextView.setText(this.rssItem.getDescription());
     }
 
     @Override
