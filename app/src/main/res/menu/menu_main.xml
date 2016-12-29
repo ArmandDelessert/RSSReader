@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/item1"
-        android:icon="@mipmap/ic_launcher"
-        app:showAsAction="ifRoom|withText"
-        android:title="item1">
-    </item>
+        android:id="@+id/refreshFeeds"
+        android:title="Refresh feeds"
+        android:icon="@drawable/ic_refresh_black_24dp"
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import hes_so.rssreader.saxrssreader.RssReader;
 
 public class CategoryViewActivity extends AppCompatActivity {
 
+    private RssReaderAsyncTask asyncTask;
     private List<RssFeed> rssFeeds;
     private List<String> listTestFeed = new ArrayList<>(Arrays.asList(
             "http://korben.info/feed",
@@ -50,6 +52,7 @@ public class CategoryViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        asyncTask = new RssReaderAsyncTask();
         rssFeeds = new ArrayList<>(1);
 
         // Création de la vue
@@ -70,12 +73,13 @@ public class CategoryViewActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button launchParsing_Button = (Button) findViewById(R.id.categoryView_launchParsing_Button);
         launchParsing_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Test d'ouverture d'un flux RSS
-                RssReaderAsyncTask asyncTask = new RssReaderAsyncTask();
+                // Ouverture des flux RSS
                 asyncTask.openRssFeeds(listTestFeed);
             }
         });
@@ -92,6 +96,20 @@ public class CategoryViewActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+/*
+            case android.R.id.refreshFeeds:
+                // Ouverture des flux RSS
+                asyncTask.openRssFeeds(listTestFeed);
+                return true;
+*/
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onAsyncTaskFinished(final List<RssFeed> rssFeeds) {

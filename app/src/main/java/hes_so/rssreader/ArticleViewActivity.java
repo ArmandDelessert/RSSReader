@@ -46,7 +46,7 @@ public class ArticleViewActivity extends AppCompatActivity {
         // Add return button to menu bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Link view to xml
+        // Link view to XML
         picture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
         title_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
         description_TextView = (TextView) findViewById(R.id.articleView_description_TextView);

@@ -17,6 +17,12 @@
         app:titleTextColor="@android:color/white"
         android:background="?attr/colorPrimary" />
 
+    // List des flux RSS
+    <ListView
+        android:id="@+id/categoryView_feeds_ListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/categoryView_launchParsing_Button"
         android:layout_width="wrap_content"
@@ -24,11 +30,5 @@
         android:text="Launch parsing!"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
-
-    // List des flux RSS
-    <ListView
-        android:id="@+id/categoryView_feeds_ListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
