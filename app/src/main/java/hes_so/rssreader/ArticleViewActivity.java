@@ -25,8 +25,6 @@ public class ArticleViewActivity extends AppCompatActivity {
     private TextView title_TextView;
     private TextView description_TextView;
 
-    Article currentArticle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
