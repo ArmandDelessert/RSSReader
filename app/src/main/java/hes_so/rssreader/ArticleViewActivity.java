@@ -1,47 +1,64 @@
 package hes_so.rssreader;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import hes_so.rssreader.saxrssreader.RssItem;
 
 /**
- * Created by HP on 01.12.2016.
+ * Project: RSSReader
+ * Author: Armand Delessert, Dessingy Edward
+ * Date: 01.12.2016
  */
 
 public class ArticleViewActivity extends AppCompatActivity {
-    //view (same name as xml)
-    ImageView ArticleView_ImageView;
-    TextView ArticleViewTitle_TextView;
-    TextView ArticleViewContent_TextView;
+
+    private RssItem rssItem;
+
+    // Attributs de la vue
+    private ImageView articlePicture_ImageView;
+    private TextView articleTitle_TextView;
+    private TextView articleDescription_TextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Récupération de l'article sélectionné par l'utilisateur
+        int selectedFeed = getIntent().getIntExtra("selectedFeed", -1);
+        int selectedArticle = getIntent().getIntExtra("selectedArticle", -1);
+        this.rssItem = Feeds.getRssFeeds().get(selectedFeed).getRssItems().get(selectedArticle);
+
+        // Creating the view
         setContentView(R.layout.activity_article_view);
 
-        // toolbar and return button
+        // Toolbar and return button
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //add return button to menu bar
+        // Add return button to menu bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Link view to xml
+        articlePicture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
+        articleTitle_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
+        articleDescription_TextView = (TextView) findViewById(R.id.articleView_description_TextView);
 
-
-        // link view to xml
-        ArticleView_ImageView = (ImageView) findViewById(R.id.ArticleView_ImageView);
-        ArticleViewTitle_TextView = (TextView) findViewById(R.id.ArticleViewTitle_TextView);
-        ArticleViewContent_TextView = (TextView) findViewById(R.id.ArticleViewContent_TextView);
-
+        // Affichage de l'article
+        articleTitle_TextView.setText(this.rssItem.getTitle());
+        articleDescription_TextView.setText(this.rssItem.getDescription());
     }
 
-    // inflate custom toolbar with menu icon
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -50,18 +67,8 @@ public class ArticleViewActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-
-        super.onDestroy();
-
-        Toast.makeText(this, "ArticleActivity destroyed", Toast.LENGTH_SHORT).show(); // DEBUG
-    }
-
-    // toolbar item
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // case return button
             case android.R.id.home:
                 finish();
                 return true;
@@ -69,4 +76,5 @@ public class ArticleViewActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

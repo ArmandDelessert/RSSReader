@@ -1,29 +1,31 @@
 package hes_so.rssreader;
 
 /**
- * Created by edward on 12/8/2016.
- *
+ * Project: RSSReader
+ * Author: Armand Delessert, Dessingy Edward
+ * Date: 01.12.2016
  */
 
 public class Article {
 
-    String Title;
-    String Content;
-    String picturePath;
+    private String title;
+    private String content;
+    private String picturePath;
 
-    Article(String title,String content, String picturePath){
-        this.Title = title;
-        this.Content=content;
-        this.picturePath = picturePath;
+
+    public Article(String title, String content, String picturePath) {
+        setTitle(title);
+        setContent(content);
+        setPicturePath(picturePath);
     }
 
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
     public String getPicturePath() {
@@ -31,16 +33,14 @@ public class Article {
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public void setContent(String content) {
-        Content = content;
+        this.content = content;
     }
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
 }
-
-
