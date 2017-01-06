@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -54,8 +55,9 @@ public class ArticleViewActivity extends AppCompatActivity {
         title_TextView.setText(this.rssItem.getTitle());
         // remove html from text
         String rawText = this.rssItem.getDescription();
-        String Text = Html.fromHtml(rawText).toString();
-        description_TextView.setText(Text);
+        String Text = Html.fromHtml(rawText).toString().replace((char) 65532, (char) 32);
+        description_TextView.setText(Html.fromHtml(rawText));
+        description_TextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override

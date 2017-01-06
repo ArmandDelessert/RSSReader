@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dip"
+        android:layout_height="100dip"
         android:orientation="vertical">
 
         // Titre de l'article
@@ -18,7 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textSize="16dp"
-            android:text="Title" />
+            android:textStyle="bold"
+            android:text="Title"
+            android:layout_margin="10dp"/>
 
         // Description de l'article
         <TextView
@@ -27,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="12dp"
+            android:layout_margin="10dp"
             android:text="Read this article" />
 
     </LinearLayout>
