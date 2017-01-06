@@ -53,7 +53,7 @@ public class ArticleListAdapter extends BaseAdapter {
         TextView description_TextView = (TextView) view.findViewById(R.id.articleListAdapter_description_TextView);
 
         title_TextView.setText(rssItemList.get(position).getTitle());
-        description_TextView.setText(rssItemList.get(position).getDescription());
+        //description_TextView.setText(rssItemList.get(position).getDescription());
 
         return view;
     }

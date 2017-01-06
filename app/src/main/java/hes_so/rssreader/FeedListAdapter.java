@@ -1,6 +1,7 @@
 package hes_so.rssreader;
 
 import android.app.Activity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,10 @@ public class FeedListAdapter extends BaseAdapter {
         TextView description_TextView = (TextView) view.findViewById(R.id.feedListAdapter_description_TextView);
 
         title_TextView.setText(rssFeedList.get(position).getTitle());
-        description_TextView.setText(rssFeedList.get(position).getDescription());
+        // remove html from text
+        String rawText = rssFeedList.get(position).getDescription();
+        String Text = Html.fromHtml(rawText).toString();
+        description_TextView.setText(Text);
 
         return view;
     }

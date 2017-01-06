@@ -3,6 +3,7 @@ package hes_so.rssreader;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -51,7 +52,10 @@ public class ArticleViewActivity extends AppCompatActivity {
 
         // Affichage de l'article
         title_TextView.setText(this.rssItem.getTitle());
-        description_TextView.setText(this.rssItem.getDescription());
+        // remove html from text
+        String rawText = this.rssItem.getDescription();
+        String Text = Html.fromHtml(rawText).toString();
+        description_TextView.setText(Text);
     }
 
     @Override
