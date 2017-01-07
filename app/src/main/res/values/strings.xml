@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RSS Reader</string>
+
+    // Menu contextuel
+    <string-array name="contextualMenu">
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
 </resources>

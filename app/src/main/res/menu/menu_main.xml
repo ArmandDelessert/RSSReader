@@ -5,9 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/refreshFeeds"
+        android:id="@+id/refreshFeeds_Button"
         android:title="Refresh feeds"
         android:icon="@drawable/ic_refresh_black_24dp"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/addFeed_Button"
+        android:title="Add feed"
+        android:icon="@drawable/ic_add_black_24dp"
         app:showAsAction="ifRoom" />
 
 </menu>
