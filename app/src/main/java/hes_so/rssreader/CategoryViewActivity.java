@@ -82,32 +82,11 @@ public class CategoryViewActivity extends AppCompatActivity {
                 intent.putExtra("selectedFeed", position);
                 startActivity(intent);
             }
-        });/*
-        // Menu contextuel ?
-        feeds_ListView.setOnContextClickListener(new View.OnContextClickListener() {
-            @Override
-            public boolean onContextClick(View view) {
-                return false;
-            }
-        });*/
+        });
+        // Menu contextuel de la feeds_ListView
+        registerForContextMenu(feeds_ListView);
 
         // Création du la boite de dialogue d'ajout d'un flux RSS
-/*
-        addFeedDialogBuilder = new AlertDialog.Builder(this);
-        addFeedDialogBuilder.setView(getLayoutInflater().inflate(R.layout.new_feed_view, null));
-        addFeedDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                addNewFeed(((EditText) findViewById(R.id.newFeedView_FeedUrl_EditText)).getText().toString());
-            }
-        });
-        addFeedDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-*/
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.add_feed_view);
 //        dialog.setTitle("Add new RSS feed"); // TODO: Auncun effet
@@ -116,7 +95,7 @@ public class CategoryViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Ajout du flux entré par l'utilisateur
                 String newFeedUrl = ((EditText)dialog.findViewById(R.id.newFeedView_FeedUrl_EditText)).getText().toString();
-                addNewFeed(newFeedUrl);
+                addFeed(newFeedUrl);
 
                 // Mise à jour de la liste des flux RSS
                 new RssReaderAsyncTask().openRssFeeds(listTestFeed);
@@ -244,10 +223,10 @@ public class CategoryViewActivity extends AppCompatActivity {
 
         switch (menuItemIndex) {
             case 0: // Edit
-
+                // TODO
                 break;
             case 1: // Delete
-                rssFeeds.remove(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
+                removeFeed(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
                 updateFeedsListView();
                 break;
             default:
@@ -261,8 +240,13 @@ public class CategoryViewActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void addNewFeed(String feedUrl) {
+    private void addFeed(String feedUrl) {
         listTestFeed.add(feedUrl);
+    }
+
+    private void removeFeed(int position) {
+        listTestFeed.remove(position);
+        rssFeeds.remove(position);
     }
 
     protected void onAsyncTaskFinished(final List<RssFeed> rssFeeds) {
