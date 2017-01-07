@@ -8,8 +8,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dip"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/layoutMargin">
 
         // Titre de l'article
         <TextView
@@ -20,7 +21,7 @@
             android:textSize="16dp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/elementSmallMargin"
             android:text="Article title" />
 
         // Description de l'article
@@ -30,7 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="12dp"
-            android:layout_margin="10dp"
             android:maxLines="2"
             android:ellipsize="end"
             android:text="Article description" />

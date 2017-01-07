@@ -4,7 +4,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/layoutMargin">
+
+    <TextView
+        android:id="@+id/newFeedView_Title_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add new RSS feed"
+        android:textSize="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/elementSmallMargin" />
+
+    <TextView
+        android:id="@+id/newFeedView_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter the RSS feed URL"
+        android:textSize="16dp"
+        android:layout_below="@+id/newFeedView_Title_TextView"
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/elementSmallMargin" />
 
     <EditText
         android:id="@+id/newFeedView_FeedUrl_EditText"
@@ -13,7 +34,8 @@
         android:inputType="textUri"
         android:text="http://www.livetile.fr/feed/"
         android:layout_below="@+id/newFeedView_TextView"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/elementSmallMargin" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -29,7 +51,8 @@
             android:text="Cancel"
             android:layout_below="@+id/newFeedView_FeedUrl_EditText"
             android:layout_alignParentStart="true"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_margin="@dimen/elementSmallMargin" />
 
         <Button
             android:id="@+id/newFeedView_Ok_Button"
@@ -38,26 +61,9 @@
             android:text="Add"
             android:layout_below="@+id/newFeedView_FeedUrl_EditText"
             android:layout_alignParentEnd="true"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_margin="@dimen/elementSmallMargin" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/newFeedView_TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter the RSS feed URL"
-        android:textSize="16dp"
-        android:layout_below="@+id/newFeedView_Title_TextView"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/newFeedView_Title_TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add new RSS feed"
-        android:textSize="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
