@@ -29,21 +29,18 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/rss_logo" />
-        <ScrollView
+
+        // Titre de l'article
+        <TextView
+            android:id="@+id/articleView_title_TextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            // Titre de l'article
-            <TextView
-                android:id="@+id/articleView_title_TextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Title of article "
-                android:gravity="center_vertical"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                android:layout_margin="10dp"/>
-        </ScrollView>
+            android:layout_height="match_parent"
+            android:text="Article title"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 
@@ -56,7 +53,7 @@
             android:id="@+id/articleView_description_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp" />
 
     </ScrollView>
 

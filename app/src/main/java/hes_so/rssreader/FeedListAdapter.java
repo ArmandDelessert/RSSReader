@@ -54,10 +54,10 @@ public class FeedListAdapter extends BaseAdapter {
         TextView description_TextView = (TextView) view.findViewById(R.id.feedListAdapter_description_TextView);
 
         title_TextView.setText(rssFeedList.get(position).getTitle());
-        // remove html from text
+        // Remove HTML from text
         String rawText = rssFeedList.get(position).getDescription();
-        String Text = Html.fromHtml(rawText).toString();
-        description_TextView.setText(Text);
+        String text = Html.fromHtml(rawText).toString();
+        description_TextView.setText(text);
 
         return view;
     }

@@ -82,13 +82,14 @@ public class CategoryViewActivity extends AppCompatActivity {
                 intent.putExtra("selectedFeed", position);
                 startActivity(intent);
             }
-        });
+        });/*
+        // Menu contextuel ?
         feeds_ListView.setOnContextClickListener(new View.OnContextClickListener() {
             @Override
             public boolean onContextClick(View view) {
                 return false;
             }
-        });
+        });*/
 
         // Création du la boite de dialogue d'ajout d'un flux RSS
 /*
@@ -113,8 +114,13 @@ public class CategoryViewActivity extends AppCompatActivity {
         dialog.findViewById(R.id.newFeedView_Ok_Button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Ajout du flux entré par l'utilisateur
                 String newFeedUrl = ((EditText)dialog.findViewById(R.id.newFeedView_FeedUrl_EditText)).getText().toString();
                 addNewFeed(newFeedUrl);
+
+                // Mise à jour de la liste des flux RSS
+                new RssReaderAsyncTask().openRssFeeds(listTestFeed);
+
                 dialog.dismiss();
             }
         });
@@ -137,7 +143,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         });
 
         // Mise à jour automatique des flux RSS à l'ouverture de l'application
-//        asyncTask.openRssFeeds(listTestFeed);
+        new RssReaderAsyncTask().openRssFeeds(listTestFeed);
 
         Button enableAnimationButton = (Button) findViewById(R.id.enableAnimationButton);
         enableAnimationButton.setOnClickListener(new View.OnClickListener() {
@@ -186,7 +192,7 @@ public class CategoryViewActivity extends AppCompatActivity {
     }
 
     /**
-     * Ouverture du menu contextuel des flux RSS.
+     * Sélection d'un élément de la barre de menu.
      *
      * @param item
      * @return
@@ -218,7 +224,7 @@ public class CategoryViewActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
         if (view.getId() == R.id.categoryView_feeds_ListView) {
             AdapterView.AdapterContextMenuInfo menuInfoAdapter = (AdapterView.AdapterContextMenuInfo)menuInfo;
-//            menu.setHeaderTitle(Countries[menuInfoAdapter.position]);
+            menu.setHeaderTitle(rssFeeds.get(menuInfoAdapter.position).getTitle());
             String[] menuItems = getResources().getStringArray(R.array.contextualMenu);
             for (int i = 0; i < menuItems.length; i++) {
                 menu.add(Menu.NONE, i, i, menuItems[i]);
@@ -357,7 +363,9 @@ public class CategoryViewActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             // Démarrage de l'animation du bouton refresh
-            imageViewForRefreshAnimation.startAnimation(refreshFeedsButtonAnimation);
+            if (imageViewForRefreshAnimation != null) {
+                imageViewForRefreshAnimation.startAnimation(refreshFeedsButtonAnimation);
+            }
         }
 
         /**
@@ -371,7 +379,9 @@ public class CategoryViewActivity extends AppCompatActivity {
             onAsyncTaskFinished(rssFeeds);
 
             // Arrêt de l'animation du bouton refresh
-            imageViewForRefreshAnimation.clearAnimation();
+            if (imageViewForRefreshAnimation != null) {
+                imageViewForRefreshAnimation.clearAnimation();
+            }
         }
     }
 
