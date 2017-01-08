@@ -10,6 +10,8 @@
         android:icon="@drawable/ic_refresh_white_24dp"
         app:showAsAction="ifRoom" />
 
+    <group
+        android:id="@+id/only_on_first_group">
     <item
         android:id="@+id/addFeed_Button"
         android:title="Add feed"
@@ -21,5 +23,6 @@
         android:title="Delete all RSS feeds"
         android:icon="@drawable/ic_clear_white_24dp"
         app:showAsAction="never" />
+    </group>
 
 </menu>
