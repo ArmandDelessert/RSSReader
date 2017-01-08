@@ -76,7 +76,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         rssFeeds = new ArrayList<>(1);
 
         // Création de la vue
-        setContentView(R.layout.activity_category_view);
+        setContentView(R.layout.category_view_activity_layout);
 
         // Toolbar (without the return button)
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -99,7 +99,7 @@ public class CategoryViewActivity extends AppCompatActivity {
 
         // Création du la boite de dialogue d'ajout d'un flux RSS
         dialog = new Dialog(this);
-        dialog.setContentView(R.layout.add_feed_view);
+        dialog.setContentView(R.layout.add_feed_dialog);
 //        dialog.setTitle("Add new RSS feed"); // TODO: Auncun effet
         dialog.findViewById(R.id.newFeedView_Ok_Button).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,7 +36,7 @@ public class FeedViewActivity extends AppCompatActivity {
         }
 
         // Creating the view
-        setContentView(R.layout.activity_feed_view);
+        setContentView(R.layout.feed_view_activity_layout);
 
         // Toolbar and return button
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

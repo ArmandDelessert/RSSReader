@@ -1,8 +1,15 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <!-- Marges -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="elementSmallMargin">2dp</dimen>
     <dimen name="layoutMargin">10dp</dimen>
     <dimen name="elementBigMargin">10dp</dimen>
+
+    <!-- Taille du texte -->
+    <dimen name="feedTitleSize">20sp</dimen>
+    <dimen name="articleTitleSize">16sp</dimen>
+    <dimen name="descriptionSize">14sp</dimen>
+
 </resources>

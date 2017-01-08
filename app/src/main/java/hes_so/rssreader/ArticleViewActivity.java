@@ -32,7 +32,7 @@ public class ArticleViewActivity extends AppCompatActivity {
         this.rssItem = Feeds.getRssFeeds().get(selectedFeed).getRssItems().get(selectedArticle);
 
         // Creating the view
-        setContentView(R.layout.activity_article_view);
+        setContentView(R.layout.article_view_activity_layout);
 
         // Toolbar and return button
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
