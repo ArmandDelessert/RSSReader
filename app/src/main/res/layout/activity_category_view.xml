@@ -32,22 +32,4 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/elementSmallMargin" />
 
-    <Button
-        android:id="@+id/enableAnimationButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enable animation!"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/elementSmallMargin" />
-
-    <Button
-        android:id="@+id/disableAnimationButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Disable animation!"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/elementSmallMargin" />
-
 </LinearLayout>

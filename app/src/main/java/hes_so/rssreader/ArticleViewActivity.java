@@ -23,7 +23,7 @@ public class ArticleViewActivity extends AppCompatActivity {
     private RssItem rssItem;
 
     // Attributs de la vue
-    private ImageView picture_ImageView;
+//  private ImageView picture_ImageView;
     private TextView title_TextView;
     private TextView description_TextView;
 
@@ -47,15 +47,14 @@ public class ArticleViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Link view to XML
-        picture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
+//      picture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
         title_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
         description_TextView = (TextView) findViewById(R.id.articleView_description_TextView);
 
         // Affichage de l'article
         title_TextView.setText(this.rssItem.getTitle());
-        // remove html from text
+        // Remove HTML from text
         String rawText = this.rssItem.getDescription();
-        String Text = Html.fromHtml(rawText).toString().replace((char) 65532, (char) 32);
         description_TextView.setText(Html.fromHtml(rawText));
         description_TextView.setMovementMethod(LinkMovementMethod.getInstance());
     }

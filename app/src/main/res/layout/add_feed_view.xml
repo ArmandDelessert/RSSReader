@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textUri"
-        android:text="http://www.livetile.fr/feed/"
+        android:text="http://exemple.com/feed/"
         android:layout_below="@+id/newFeedView_TextView"
         android:layout_alignParentStart="true"
         android:layout_margin="@dimen/elementSmallMargin" />

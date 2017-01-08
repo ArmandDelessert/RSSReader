@@ -1,10 +1,11 @@
 package hes_so.rssreader;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -22,7 +23,13 @@ import android.widget.Toast;
 
 import org.xml.sax.SAXException;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,13 +50,15 @@ public class CategoryViewActivity extends AppCompatActivity {
 
     private boolean openingRssFeeds;
     private List<RssFeed> rssFeeds;
-    private List<String> listTestFeed = new ArrayList<>(Arrays.asList(
+    private List<String> rssFeedUrlList;
+    private final List<String> rssFeedUrlBaseList = new ArrayList<>(Arrays.asList(
             "korben.info/feed",
+            "http://www.numerama.com/feed/",
             "http://feeds.feedburner.com/lerendezvoustech",
             "http://feeds.feedburner.com/lerendezvousjeux",
-            "http://www.numerama.com/feed/"
+            "http://www.livetile.fr/feed/"
     ));
-    private AlertDialog.Builder addFeedDialogBuilder;
+    private final String rssFeedListFileName = "RssFeedList.RssReader";
     private Dialog dialog;
 
     // Attributs de la vue
@@ -98,7 +107,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                 addFeed(newFeedUrl);
 
                 // Mise à jour de la liste des flux RSS
-                new RssReaderAsyncTask().openRssFeeds(listTestFeed);
+                new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
 
                 dialog.dismiss();
             }
@@ -117,32 +126,36 @@ public class CategoryViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Ouverture des flux RSS
-                new RssReaderAsyncTask().openRssFeeds(listTestFeed);
+                new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
             }
         });
+
+        // Lecture ou création du fichier de sauvegarde des flux RSS
+        if (doesFileExist(rssFeedListFileName)) {
+            rssFeedUrlList = readFromFile(rssFeedListFileName);
+        }
+        else {
+            rssFeedUrlList = rssFeedUrlBaseList;
+            writeToFile(rssFeedUrlList, rssFeedListFileName);
+        }
 
         // Mise à jour automatique des flux RSS à l'ouverture de l'application
-        new RssReaderAsyncTask().openRssFeeds(listTestFeed);
-
-        Button enableAnimationButton = (Button) findViewById(R.id.enableAnimationButton);
-        enableAnimationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageViewForRefreshAnimation.startAnimation(refreshFeedsButtonAnimation);
-            }
-        });
-        Button disableAnimationButton = (Button) findViewById(R.id.disableAnimationButton);
-        disableAnimationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageViewForRefreshAnimation.clearAnimation();
-            }
-        });
+        new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -165,7 +178,6 @@ public class CategoryViewActivity extends AppCompatActivity {
         imageViewForRefreshAnimation = (ImageView) getLayoutInflater().inflate(R.layout.refresh_button_animation, null);
         refreshFeedsButtonAnimation = AnimationUtils.loadAnimation(this, R.anim.refresh_button_animation);
         menu.findItem(R.id.refreshFeeds_Button).setActionView(imageViewForRefreshAnimation);
-//        imageViewForRefreshAnimation.setAnimation(refreshFeedsButtonAnimation);
 
         return true;
     }
@@ -181,7 +193,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.refreshFeeds_Button:
                 // Mise à jour des flux RSS
-                new RssReaderAsyncTask().openRssFeeds(listTestFeed);
+                new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
                 return true;
             case R.id.addFeed_Button:
                 // Ouverture de la boite de dialogue d'ajout d'un flux RSS
@@ -236,17 +248,22 @@ public class CategoryViewActivity extends AppCompatActivity {
     }
 
     private void showAddFeedDialog() {
-//        addFeedDialogBuilder.create().show();
         dialog.show();
     }
 
     private void addFeed(String feedUrl) {
-        listTestFeed.add(feedUrl);
+        rssFeedUrlList.add(feedUrl);
+
+        // Sauvegarde de la liste des flux RSS
+        writeToFile(rssFeedUrlList, rssFeedListFileName);
     }
 
     private void removeFeed(int position) {
-        listTestFeed.remove(position);
+        rssFeedUrlList.remove(position);
         rssFeeds.remove(position);
+
+        // Sauvegarde de la liste des flux RSS
+        writeToFile(rssFeedUrlList, rssFeedListFileName);
     }
 
     protected void onAsyncTaskFinished(final List<RssFeed> rssFeeds) {
@@ -268,11 +285,65 @@ public class CategoryViewActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Enregistrement des flux RSS dans un fichier de sauvegarde.
+     *
+     * @param rssFeedList
+     */
+    private void writeToFile(List<String> rssFeedList, String fileName) {
+        try {
+            Writer outputWriter = new BufferedWriter(new OutputStreamWriter(getApplicationContext().openFileOutput(fileName, Context.MODE_PRIVATE)));
+
+            for (String rssFeed : rssFeedList) {
+                outputWriter.write(rssFeed + System.lineSeparator());
+            }
+
+            outputWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Lecture des flux RSS depuis le fichier de sauvegarde.
+     *
+     * @return
+     */
+    private List<String> readFromFile(String fileName) {
+        List<String> rssFeedList = new LinkedList<>();
+
+        try {
+            InputStream inputStream = getApplicationContext().openFileInput(fileName);
+
+            if (inputStream != null) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String string;
+
+                while ((string = bufferedReader.readLine()) != null) {
+                    rssFeedList.add(string);
+                }
+
+                inputStream.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return rssFeedList;
+    }
+
+    private boolean doesFileExist(String fileName) {
+        return getApplicationContext().getFileStreamPath(fileName).exists();
+    }
+
 
     /**
      * Ouverture d'un ou de plusieurs flux RSS en tâche de fond.
      */
     class RssReaderAsyncTask extends AsyncTask<URL, Void, List<RssFeed>> {
+
+        Activity parent = CategoryViewActivity.this;
+
 
         /**
          * Ouverture d'un flux RSS.
@@ -295,20 +366,22 @@ public class CategoryViewActivity extends AppCompatActivity {
         public void openRssFeeds(List<String> urls) {
             List<URL> urlList = new LinkedList<>();
 
-            for (String url : urls) {
-                try {
-                    urlList.add(new URL(url));
-                } catch (MalformedURLException e1) {
-                    // Ajout automatique du protocole HTTP s'il est manquant
-                    if (e1.getMessage().contains("Protocol not found")) {
-                        try {
-                            urlList.add(new URL("http://" + url));
-                        } catch (MalformedURLException e2) {
+            // Lecture des URL
+            if (urls != null) {
+                for (String url : urls) {
+                    try {
+                        urlList.add(new URL(url));
+                    } catch (MalformedURLException e1) {
+                        // Ajout automatique du protocole HTTP s'il est manquant
+                        if (e1.getMessage().contains("Protocol not found")) {
+                            try {
+                                urlList.add(new URL("http://" + url));
+                            } catch (MalformedURLException e2) {
+                                e1.printStackTrace();
+                            }
+                        } else {
                             e1.printStackTrace();
                         }
-                    }
-                    else {
-                        e1.printStackTrace();
                     }
                 }
             }
@@ -333,12 +406,29 @@ public class CategoryViewActivity extends AppCompatActivity {
             RssReader rssReader = new RssReader();
             List<RssFeed> rssFeeds = new LinkedList<>();
 
-            try {
-                for (URL url : urls) {
+            // Récupération des fichiers XML aux URL spécifées
+            List<String> listError = new LinkedList<>();
+            for (URL url : urls) {
+                try {
                     rssFeeds.add(rssReader.read(url));
+                } catch (SAXException | IOException e) {
+                    e.printStackTrace();
+
+                    listError.add(url.toString());
                 }
-            } catch (SAXException | IOException e) {
-                e.printStackTrace();
+            }
+
+            if (listError.size() > 0) {
+                final String finalErrors = listError.toString().replace("[", "").replace("]", "").replace(", ", "\n");
+                parent.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(CategoryViewActivity.this,
+                                "Erreur lors du parsing des flux RSS aux adresses :\n" +
+                                        finalErrors,
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             return rssFeeds;
