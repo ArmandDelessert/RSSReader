@@ -1,6 +1,5 @@
 package hes_so.rssreader;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,11 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import hes_so.rssreader.saxrssreader.RssItem;
 
@@ -33,12 +27,6 @@ public class ArticleViewActivity extends AppCompatActivity {
     private TextView title_TextView;
     private TextView description_TextView;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +42,9 @@ public class ArticleViewActivity extends AppCompatActivity {
 
         // Toolbar and return button
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //change title in toolbar
-        toolbar.setTitle(this.rssItem.getTitle());
         setSupportActionBar(toolbar);
         // Add return button to menu bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        
-
 
         // Link view to XML
 //      picture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
@@ -74,9 +57,6 @@ public class ArticleViewActivity extends AppCompatActivity {
         String rawText = this.rssItem.getDescription();
         description_TextView.setText(Html.fromHtml(rawText));
         description_TextView.setMovementMethod(LinkMovementMethod.getInstance());
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -102,39 +82,4 @@ public class ArticleViewActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("ArticleView Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
 }
