@@ -35,7 +35,7 @@
         <TextView
             android:id="@+id/articleView_title_TextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -48,13 +48,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layoutMargin">
+        >
 
         // Description de l'article
         <TextView
             android:id="@+id/articleView_description_TextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/layoutMargin"
+            android:ellipsize="none"/>
 
     </ScrollView>
 
