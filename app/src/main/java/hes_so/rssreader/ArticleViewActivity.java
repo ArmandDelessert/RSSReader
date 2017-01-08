@@ -47,6 +47,7 @@ public class ArticleViewActivity extends AppCompatActivity {
         // Add return button to menu bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         // Link view to XML
 //      picture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
         title_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
@@ -68,7 +69,7 @@ public class ArticleViewActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_other, menu);
         return true;
     }
 
