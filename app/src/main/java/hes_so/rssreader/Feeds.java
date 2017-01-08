@@ -11,9 +11,9 @@ import hes_so.rssreader.saxrssreader.RssFeed;
  * Date: 28.12.2016
  */
 
-public class Feeds {
+class Feeds {
 
-    private static Feeds instance = new Feeds();
+    private static final Feeds instance = new Feeds();
     public static Feeds getInstance() {
         return instance;
     }
@@ -21,14 +21,14 @@ public class Feeds {
     private static List<RssFeed> rssFeeds;
 
     private Feeds() {
-        this.rssFeeds = new ArrayList<>();
+        rssFeeds = new ArrayList<>();
     }
 
-    public static void setRssFeeds(List<RssFeed> rssFeeds) {
+    static void setRssFeeds(List<RssFeed> rssFeeds) {
         Feeds.rssFeeds = rssFeeds;
     }
 
-    public static List<RssFeed> getRssFeeds() {
+    static List<RssFeed> getRssFeeds() {
         return Feeds.rssFeeds;
     }
 

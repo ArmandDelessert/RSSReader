@@ -69,11 +69,8 @@ public class RssHandler extends DefaultHandler {
 				    Method method = rssFeed.getClass().getMethod(methodName, String.class);
 				    method.invoke(rssFeed, stringBuilder.toString());
 				}
-			} catch (SecurityException e) {
-			} catch (NoSuchMethodException e) {
-			} catch (IllegalArgumentException e) {
-			} catch (IllegalAccessException e) {
-			} catch (InvocationTargetException e) {
+			} catch (SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
 			}
 
 		} else if (rssItem != null) {
@@ -85,11 +82,8 @@ public class RssHandler extends DefaultHandler {
 				String methodName = "set" + qName.substring(0, 1).toUpperCase() + qName.substring(1);
 				Method method = rssItem.getClass().getMethod(methodName, String.class);
 				method.invoke(rssItem, stringBuilder.toString());
-			} catch (SecurityException e) {
-			} catch (NoSuchMethodException e) {
-			} catch (IllegalArgumentException e) {
-			} catch (IllegalAccessException e) {
-			} catch (InvocationTargetException e) {
+			} catch (SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
 			}
 		}
 

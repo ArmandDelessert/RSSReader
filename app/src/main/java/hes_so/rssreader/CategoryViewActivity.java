@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -136,26 +135,6 @@ public class CategoryViewActivity extends AppCompatActivity {
         new RssReaderAsyncTask().openRssFeeds();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     /**
      * Création de la barre de menu.
      *
@@ -200,7 +179,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                 // Ouverture de la boite de dialogue d'ajout d'un flux RSS
                 showAddFeedDialog();
                 return true;
-            case R.id.deleteAllRrssFreeds_Button:
+            case R.id.deleteAllRssFeeds_Button:
                 rssFeeds.clear();
                 rssFeedUrlList.clear();
                 clearFile(rssFeedListFileName);
@@ -269,7 +248,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         writeToFile(rssFeedUrlList, rssFeedListFileName);
     }
 
-    protected void onAsyncTaskFinished(final List<RssFeed> rssFeeds) {
+    private void onAsyncTaskFinished(final List<RssFeed> rssFeeds) {
         this.rssFeeds = rssFeeds;
         Feeds.setRssFeeds(rssFeeds); // TODO Feeds
 
@@ -352,7 +331,7 @@ public class CategoryViewActivity extends AppCompatActivity {
      */
     class RssReaderAsyncTask extends AsyncTask<URL, Void, List<RssFeed>> {
 
-        Activity parent = CategoryViewActivity.this;
+        final Activity parent = CategoryViewActivity.this;
 
 
         /**
@@ -395,7 +374,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                 }
             }
 
-            if (openingRssFeeds == false) {
+            if (!openingRssFeeds) {
                 openingRssFeeds = true;
                 this.execute(urlList.toArray(new URL[urlList.size()]));
             }
@@ -412,14 +391,13 @@ public class CategoryViewActivity extends AppCompatActivity {
          */
         @Override
         protected List<RssFeed> doInBackground(URL... urls) {
-            RssReader rssReader = new RssReader();
             List<RssFeed> rssFeeds = new LinkedList<>();
 
             // Récupération des fichiers XML aux URL spécifées
             List<String> listError = new LinkedList<>();
             for (URL url : urls) {
                 try {
-                    rssFeeds.add(rssReader.read(url));
+                    rssFeeds.add(RssReader.read(url));
                 } catch (SAXException | IOException e) {
                     e.printStackTrace();
 

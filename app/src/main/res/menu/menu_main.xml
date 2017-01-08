@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/refreshFeeds_Button"
-        android:title="Refresh feeds"
+        android:title="@string/refreshFeeds_Button"
         android:icon="@drawable/ic_refresh_white_24dp"
         app:showAsAction="ifRoom" />
 
@@ -14,13 +14,13 @@
         android:id="@+id/only_on_first_group">
     <item
         android:id="@+id/addFeed_Button"
-        android:title="Add feed"
+        android:title="@string/addFeed_Button"
         android:icon="@drawable/ic_add_white_24dp"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/deleteAllRrssFreeds_Button"
-        android:title="Delete all RSS feeds"
+        android:id="@+id/deleteAllRssFeeds_Button"
+        android:title="@string/deleteAllRssFeeds_Button"
         android:icon="@drawable/ic_clear_white_24dp"
         app:showAsAction="never" />
     </group>

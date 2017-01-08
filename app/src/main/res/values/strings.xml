@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">RSS Reader</string>
+    <string name="refreshFeeds_Button">Refresh feeds</string>
+    <string name="addFeed_Button">Add feed</string>
+    <string name="deleteAllRssFeeds_Button">Delete all RSS feeds</string>
+    <string name="articleView_title_TextView">Article title</string>
+    <string name="newFeedView_FeedUrl_EditText">http://exemple.com/feed/</string>
+    <string name="newFeedView_Cancel_Button">Cancel</string>
+    <string name="newFeedView_Ok_Button">Add</string>
+    <string name="articleListAdapter_title_TextView">Article title</string>
+    <string name="articleListAdapter_description_TextView">Article description</string>
+    <string name="feedListAdapter_title_TextView">Feed title</string>
+    <string name="feedListAdapter_description_TextView">Feed description</string>
 
     // Menu contextuel
     <string-array name="contextualMenu">

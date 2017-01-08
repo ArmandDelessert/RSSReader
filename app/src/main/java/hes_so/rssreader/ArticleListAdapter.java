@@ -18,7 +18,7 @@ import hes_so.rssreader.saxrssreader.RssItem;
  * Date: 28.12.2016
  */
 
-public class ArticleListAdapter extends BaseAdapter {
+class ArticleListAdapter extends BaseAdapter {
 
     private static LayoutInflater layoutInflater;
     private List<RssItem> rssItemList;

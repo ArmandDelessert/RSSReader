@@ -24,9 +24,6 @@ public class FeedViewActivity extends AppCompatActivity {
 
     private List<RssItem> rssItems;
 
-    // Attributs de la vue
-    private ListView articles_ListView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,7 @@ public class FeedViewActivity extends AppCompatActivity {
         // Add the return button to menu bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        articles_ListView = (ListView) findViewById(R.id.feedView_articles_ListView);
+        ListView articles_ListView = (ListView) findViewById(R.id.feedView_articles_ListView);
         articles_ListView.setAdapter(new ArticleListAdapter(this, this.rssItems));
         articles_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,11 +56,6 @@ public class FeedViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @Override

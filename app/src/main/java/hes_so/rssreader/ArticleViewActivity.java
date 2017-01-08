@@ -7,7 +7,6 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import hes_so.rssreader.saxrssreader.RssItem;
@@ -21,11 +20,6 @@ import hes_so.rssreader.saxrssreader.RssItem;
 public class ArticleViewActivity extends AppCompatActivity {
 
     private RssItem rssItem;
-
-    // Attributs de la vue
-//  private ImageView picture_ImageView;
-    private TextView title_TextView;
-    private TextView description_TextView;
 
 
     @Override
@@ -49,9 +43,8 @@ public class ArticleViewActivity extends AppCompatActivity {
 
 
         // Link view to XML
-//      picture_ImageView = (ImageView) findViewById(R.id.articleView_picture_ImageView);
-        title_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
-        description_TextView = (TextView) findViewById(R.id.articleView_description_TextView);
+        TextView title_TextView = (TextView) findViewById(R.id.articleView_title_TextView);
+        TextView description_TextView = (TextView) findViewById(R.id.articleView_description_TextView);
 
         // Affichage de l'article
         title_TextView.setText(this.rssItem.getTitle());
@@ -59,11 +52,6 @@ public class ArticleViewActivity extends AppCompatActivity {
         String rawText = this.rssItem.getDescription();
         description_TextView.setText(Html.fromHtml(rawText));
         description_TextView.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @Override

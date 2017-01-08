@@ -4,37 +4,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/layoutMargin">
 
-    <LinearLayout
+    <!-- Titre de l'article -->
+    <TextView
+        android:id="@+id/articleListAdapter_title_TextView"
+        android:text="@string/articleListAdapter_title_TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/layoutMargin">
+        android:layout_weight="2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_marginBottom="@dimen/elementSmallMargin" />
 
-        // Titre de l'article
-        <TextView
-            android:id="@+id/articleListAdapter_title_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:layout_marginBottom="@dimen/elementSmallMargin"
-            android:text="Article title" />
-
-        // Description de l'article
-        <TextView
-            android:id="@+id/articleListAdapter_description_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="12dp"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:text="Article description" />
-
-    </LinearLayout>
+    <!-- Description de l'article -->
+    <TextView
+        android:id="@+id/articleListAdapter_description_TextView"
+        android:text="@string/articleListAdapter_description_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        android:maxLines="2"
+        android:ellipsize="end" />
 
 </LinearLayout>

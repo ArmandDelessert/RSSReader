@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    // Toolbar
+    <!-- Toolbar -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
@@ -17,10 +17,11 @@
         android:background="?attr/colorPrimary"
         app:titleTextColor="@android:color/white" />
 
-    // List des flux RSS
+    <!-- List des flux RSS -->
     <ListView
         android:id="@+id/categoryView_feeds_ListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layoutMargin"/>
 
 </LinearLayout>

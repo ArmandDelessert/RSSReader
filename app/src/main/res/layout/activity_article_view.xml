@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    // Toolbar
+    <!-- Toolbar -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
@@ -23,7 +23,7 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/layoutMargin">
 
-        // Illustration de l'article
+        <!-- Illustration de l'article -->
         <ImageView
             android:id="@+id/articleView_picture_ImageView"
             android:layout_centerVertical="true"
@@ -31,18 +31,18 @@
             android:layout_height="80dp"
             android:src="@drawable/ic_rss_green_24dp" />
 
-        // Titre de l'article
+        <!-- Titre de l'article -->
         <TextView
             android:id="@+id/articleView_title_TextView"
+            android:text="@string/articleView_title_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:layout_marginLeft="@dimen/elementBigMargin"
+            android:layout_marginStart="@dimen/elementBigMargin"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/articleView_picture_ImageView"
-            android:text="Article title" />
+            android:layout_toEndOf="@+id/articleView_picture_ImageView" />
 
     </RelativeLayout>
 
@@ -50,11 +50,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        // Description de l'article
+        <!-- Description de l'article -->
         <TextView
             android:id="@+id/articleView_description_TextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/layoutMargin"
             android:ellipsize="none" />
 

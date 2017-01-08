@@ -18,7 +18,7 @@ import hes_so.rssreader.saxrssreader.RssFeed;
  * Date: 28.12.2016
  */
 
-public class FeedListAdapter extends BaseAdapter {
+class FeedListAdapter extends BaseAdapter {
 
     private static LayoutInflater layoutInflater;
     private List<RssFeed> rssFeedList;
