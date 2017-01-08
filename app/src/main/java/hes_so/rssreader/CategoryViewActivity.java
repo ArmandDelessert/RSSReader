@@ -25,6 +25,7 @@ import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,6 +55,7 @@ public class CategoryViewActivity extends AppCompatActivity {
     private final List<String> rssFeedUrlBaseList = new ArrayList<>(Arrays.asList(
             "korben.info/feed",
             "http://www.numerama.com/feed/",
+            "http://www.gamekult.com/feeds/actu.html",
             "http://feeds.feedburner.com/lerendezvoustech",
             "http://feeds.feedburner.com/lerendezvousjeux",
             "http://www.livetile.fr/feed/"
@@ -107,7 +109,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                 addFeed(newFeedUrl);
 
                 // Mise à jour de la liste des flux RSS
-                new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
+                new RssReaderAsyncTask().openRssFeeds();
 
                 dialog.dismiss();
             }
@@ -126,7 +128,7 @@ public class CategoryViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Ouverture des flux RSS
-                new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
+                new RssReaderAsyncTask().openRssFeeds();
             }
         });
 
@@ -140,7 +142,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         }
 
         // Mise à jour automatique des flux RSS à l'ouverture de l'application
-        new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
+        new RssReaderAsyncTask().openRssFeeds();
     }
 
     @Override
@@ -193,12 +195,17 @@ public class CategoryViewActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.refreshFeeds_Button:
                 // Mise à jour des flux RSS
-                new RssReaderAsyncTask().openRssFeeds(rssFeedUrlList);
+                new RssReaderAsyncTask().openRssFeeds();
                 return true;
             case R.id.addFeed_Button:
                 // Ouverture de la boite de dialogue d'ajout d'un flux RSS
                 showAddFeedDialog();
                 return true;
+            case R.id.deleteAllRrssFreeds_Button:
+                rssFeeds.clear();
+                rssFeedUrlList.clear();
+                clearFile(rssFeedListFileName);
+                updateFeedsListView();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -253,9 +260,6 @@ public class CategoryViewActivity extends AppCompatActivity {
 
     private void addFeed(String feedUrl) {
         rssFeedUrlList.add(feedUrl);
-
-        // Sauvegarde de la liste des flux RSS
-        writeToFile(rssFeedUrlList, rssFeedListFileName);
     }
 
     private void removeFeed(int position) {
@@ -272,6 +276,9 @@ public class CategoryViewActivity extends AppCompatActivity {
 
         // Mise à jour de la liste des flux RSS
         updateFeedsListView();
+
+        // Sauvegarde de la liste des flux RSS
+        writeToFile(rssFeedUrlList, rssFeedListFileName);
 
         Toast.makeText(this, "Liste des flux RSS mise à jour.", Toast.LENGTH_SHORT).show();
     }
@@ -302,6 +309,10 @@ public class CategoryViewActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void clearFile(String fileName) {
+        new File(fileName).delete();
     }
 
     /**
@@ -360,15 +371,13 @@ public class CategoryViewActivity extends AppCompatActivity {
 
         /**
          * Ouverture d'une liste de flux RSS.
-         *
-         * @param urls
          */
-        public void openRssFeeds(List<String> urls) {
+        public void openRssFeeds() {
             List<URL> urlList = new LinkedList<>();
 
             // Lecture des URL
-            if (urls != null) {
-                for (String url : urls) {
+            if (rssFeedUrlList != null) {
+                for (String url : rssFeedUrlList) {
                     try {
                         urlList.add(new URL(url));
                     } catch (MalformedURLException e1) {
@@ -378,6 +387,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                                 urlList.add(new URL("http://" + url));
                             } catch (MalformedURLException e2) {
                                 e1.printStackTrace();
+                                rssFeedUrlList.remove(url);
                             }
                         } else {
                             e1.printStackTrace();
