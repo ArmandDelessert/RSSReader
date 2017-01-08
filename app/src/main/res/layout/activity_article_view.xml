@@ -17,7 +17,7 @@
         android:background="?attr/colorPrimary"
         app:titleTextColor="@android:color/white" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -26,7 +26,7 @@
         // Illustration de l'article
         <ImageView
             android:id="@+id/articleView_picture_ImageView"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_rss_green_24dp" />
@@ -36,19 +36,19 @@
             android:id="@+id/articleView_title_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:layout_marginLeft="@dimen/elementBigMargin"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/articleView_picture_ImageView"
             android:text="Article title" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         // Description de l'article
         <TextView
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/layoutMargin"
-            android:ellipsize="none"/>
+            android:ellipsize="none" />
 
     </ScrollView>
 

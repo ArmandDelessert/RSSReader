@@ -94,6 +94,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         // Menu contextuel de la feeds_ListView
         registerForContextMenu(feeds_ListView);
 
@@ -121,16 +122,6 @@ public class CategoryViewActivity extends AppCompatActivity {
             }
         });
         dialog.setCancelable(true);
-
-        // Création du bouton de téléchargement et parsing des flux RSS
-        Button launchParsing_Button = (Button) findViewById(R.id.categoryView_launchParsing_Button);
-        launchParsing_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Ouverture des flux RSS
-                new RssReaderAsyncTask().openRssFeeds();
-            }
-        });
 
         // Lecture ou création du fichier de sauvegarde des flux RSS
         if (doesFileExist(rssFeedListFileName)) {
@@ -180,6 +171,14 @@ public class CategoryViewActivity extends AppCompatActivity {
         imageViewForRefreshAnimation = (ImageView) getLayoutInflater().inflate(R.layout.refresh_button_animation, null);
         refreshFeedsButtonAnimation = AnimationUtils.loadAnimation(this, R.anim.refresh_button_animation);
         menu.findItem(R.id.refreshFeeds_Button).setActionView(imageViewForRefreshAnimation);
+
+        imageViewForRefreshAnimation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Mise à jour des flux RSS
+                new RssReaderAsyncTask().openRssFeeds();
+            }
+        });
 
         return true;
     }
