@@ -150,6 +150,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         imageViewForRefreshAnimation = (ImageView) getLayoutInflater().inflate(R.layout.refresh_button_animation, null);
         refreshFeedsButtonAnimation = AnimationUtils.loadAnimation(this, R.anim.refresh_button_animation);
         menu.findItem(R.id.refreshFeeds_Button).setActionView(imageViewForRefreshAnimation);
+        imageViewForRefreshAnimation.startAnimation(refreshFeedsButtonAnimation);
 
         imageViewForRefreshAnimation.setOnClickListener(new View.OnClickListener() {
             @Override
