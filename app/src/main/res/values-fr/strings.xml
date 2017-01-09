@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="app_name">RSS Reader</string>
+
+    <!-- Barre de menu -->
+    <string name="refreshFeeds_Button">Actualiser les flux RSS</string>
+    <string name="addFeed_Button">Ajouter un flux RSS</string>
+    <string name="deleteAllRssFeeds_Button">Supprimer tous les flux RSS</string>
+
+    <!-- FeedListAdapter -->
+    <string name="feedListAdapter_title_TextView">Titre du flux RSS</string>
+    <string name="feedListAdapter_description_TextView">Description du flux RSS</string>
+
+    <!-- ArticleListAdapter -->
+    <string name="articleListAdapter_title_TextView">Titre de l\'article</string>
+    <string name="articleListAdapter_description_TextView">Description de l\'article</string>
+
+    <!-- ArticleViewActivity -->
+    <string name="articleView_title_TextView">Titre de l\'article</string>
+
+    <!-- add_feed_dialog -->
+    <string name="newFeedView_Title_TextView">Ajouter un nouveau flux RSS</string>
+    <string name="newFeedView_TextView">Entrez l\'URL du flux RSS :</string>
+    <string name="newFeedView_Cancel_Button">Annuler</string>
+    <string name="newFeedView_Ok_Button">Ajouter</string>
+
+    <!-- CategoryViewActivity -->
+    <string name="rssFeedsUpdate_Toast">Liste des flux RSS mise à jour.</string>
+    <string name="rssFeedsAlreadyUpdating_Toast">La mise à jour des flux RSS est déjà en cours…</string>
+    <string name="rssFeedsParsingError_Toast">Erreur lors du parsing des flux RSS aux adresses :\n</string>
+
+    <!-- Menu contextuel -->
+    <string-array name="contextualMenu">
+        <item>Modifier</item>
+        <item>Effacer</item>
+    </string-array>
+
+</resources>

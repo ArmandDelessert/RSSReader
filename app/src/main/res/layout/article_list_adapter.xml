@@ -14,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
+        android:layout_marginBottom="@dimen/elementSmallMargin"
         android:textSize="@dimen/articleTitleSize"
         android:textStyle="bold"
-        android:textColor="@color/colorAccent"
-        android:layout_marginBottom="@dimen/elementSmallMargin" />
+        android:textColor="@color/colorAccent" />
 
     <!-- Description de l'article -->
     <TextView
@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginBottom="@dimen/elementBigMargin"
         android:textSize="@dimen/descriptionSize"
         android:maxLines="2"
         android:ellipsize="end" />

@@ -59,7 +59,7 @@ public class CategoryViewActivity extends AppCompatActivity {
             "http://feeds.feedburner.com/lerendezvousjeux",
             "http://www.livetile.fr/feed/"
     ));
-    private final String rssFeedListFileName = "RssFeedList.RssReader";
+    private final String rssFeedListFileName = "RssFeedList.RSSReader";
     private Dialog dialog;
 
     // Attributs de la vue
@@ -258,7 +258,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         // Sauvegarde de la liste des flux RSS
         writeToFile(rssFeedUrlList, rssFeedListFileName);
 
-        Toast.makeText(this, "Liste des flux RSS mise à jour.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.rssFeedsUpdate_Toast, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -379,7 +379,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                 this.execute(urlList.toArray(new URL[urlList.size()]));
             }
             else {
-                Toast.makeText(CategoryViewActivity.this, "La mise à jour des flux RSS est déjà en cours…", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CategoryViewActivity.this, R.string.rssFeedsAlreadyUpdating_Toast, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -411,7 +411,7 @@ public class CategoryViewActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(CategoryViewActivity.this,
-                                "Erreur lors du parsing des flux RSS aux adresses :\n" +
+                                getString(R.string.rssFeedsParsingError_Toast) +
                                         finalErrors,
                                 Toast.LENGTH_LONG).show();
                     }

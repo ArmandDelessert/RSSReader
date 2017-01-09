@@ -1,18 +1,36 @@
 <resources>
+
     <string name="app_name">RSS Reader</string>
-    <string name="refreshFeeds_Button">Refresh feeds</string>
-    <string name="addFeed_Button">Add feed</string>
+
+    <!-- Barre de menu -->
+    <string name="refreshFeeds_Button">Refresh RSS feeds</string>
+    <string name="addFeed_Button">Add RSS feed</string>
     <string name="deleteAllRssFeeds_Button">Delete all RSS feeds</string>
-    <string name="articleView_title_TextView">Article title</string>
-    <string name="newFeedView_FeedUrl_EditText">http://exemple.com/feed/</string>
-    <string name="newFeedView_Cancel_Button">Cancel</string>
-    <string name="newFeedView_Ok_Button">Add</string>
-    <string name="articleListAdapter_title_TextView">Article title</string>
-    <string name="articleListAdapter_description_TextView">Article description</string>
+
+    <!-- FeedListAdapter -->
     <string name="feedListAdapter_title_TextView">Feed title</string>
     <string name="feedListAdapter_description_TextView">Feed description</string>
 
-    // Menu contextuel
+    <!-- ArticleListAdapter -->
+    <string name="articleListAdapter_title_TextView">Article title</string>
+    <string name="articleListAdapter_description_TextView">Article description</string>
+
+    <!-- ArticleViewActivity -->
+    <string name="articleView_title_TextView">Article title</string>
+
+    <!-- add_feed_dialog -->
+    <string name="newFeedView_Title_TextView">Add new RSS feed</string>
+    <string name="newFeedView_TextView">Enter the RSS feed URL:</string>
+    <string name="newFeedView_FeedUrl_EditText">http://exemple.com/feed/</string>
+    <string name="newFeedView_Cancel_Button">Cancel</string>
+    <string name="newFeedView_Ok_Button">Add</string>
+
+    <!-- CategoryViewActivity -->
+    <string name="rssFeedsUpdate_Toast">RSS feeds list updated.</string>
+    <string name="rssFeedsAlreadyUpdating_Toast">RSS feeds list is already updating…</string>
+    <string name="rssFeedsParsingError_Toast">Error while parsing RSS feeds at theses addresses:\n</string>
+
+    <!-- Menu contextuel -->
     <string-array name="contextualMenu">
         <item>Edit</item>
         <item>Delete</item>

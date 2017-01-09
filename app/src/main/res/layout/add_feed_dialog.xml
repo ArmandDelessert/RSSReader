@@ -9,23 +9,23 @@
 
     <TextView
         android:id="@+id/newFeedView_Title_TextView"
+        android:text="@string/newFeedView_Title_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_margin="@dimen/elementSmallMargin"
-        android:text="Add new RSS feed" />
+        android:layout_margin="@dimen/elementSmallMargin" />
 
     <TextView
         android:id="@+id/newFeedView_TextView"
+        android:text="@string/newFeedView_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_below="@+id/newFeedView_Title_TextView"
         android:layout_alignParentStart="true"
-        android:layout_margin="@dimen/elementSmallMargin"
-        android:text="Enter the RSS feed URL" />
+        android:layout_margin="@dimen/elementSmallMargin" />
 
     <EditText
         android:id="@+id/newFeedView_FeedUrl_EditText"
