@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -49,7 +50,6 @@ import hes_so.rssreader.saxrssreader.RssReader;
 public class CategoryViewActivity extends AppCompatActivity {
 
     private boolean openingRssFeeds;
-    private List<RssFeed> rssFeeds;
     private List<String> rssFeedUrlList;
     private final List<String> rssFeedUrlBaseList = new ArrayList<>(Arrays.asList(
             "korben.info/feed",
@@ -73,7 +73,6 @@ public class CategoryViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         openingRssFeeds = false;
-        rssFeeds = new ArrayList<>(1);
 
         // Création de la vue
         setContentView(R.layout.category_view_activity_layout);
@@ -84,7 +83,7 @@ public class CategoryViewActivity extends AppCompatActivity {
 
         // Création de la liste des flux RSS
         feeds_ListView = (ListView) findViewById(R.id.categoryView_feeds_ListView);
-        feeds_ListView.setAdapter(new FeedListAdapter(this, this.rssFeeds));
+        feeds_ListView.setAdapter(new FeedListAdapter(this, Feeds.getRssFeeds()));
         feeds_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -123,7 +122,7 @@ public class CategoryViewActivity extends AppCompatActivity {
         dialog.setCancelable(true);
 
         // Lecture ou création du fichier de sauvegarde des flux RSS
-        if (doesFileExist(rssFeedListFileName)) {
+        if (doesFileExistAndNotEmpty(rssFeedListFileName)) {
             rssFeedUrlList = readFromFile(rssFeedListFileName);
         }
         else {
@@ -181,10 +180,12 @@ public class CategoryViewActivity extends AppCompatActivity {
                 showAddFeedDialog();
                 return true;
             case R.id.deleteAllRssFeeds_Button:
-                rssFeeds.clear();
+                Feeds.clearRssFeeds();
                 rssFeedUrlList.clear();
                 clearFile(rssFeedListFileName);
                 updateFeedsListView();
+                // Mise à jour des flux RSS
+                new RssReaderAsyncTask().openRssFeeds(); // Permet d'effacer le contenu du fichier de sauvegarde
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -201,7 +202,7 @@ public class CategoryViewActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
         if (view.getId() == R.id.categoryView_feeds_ListView) {
             AdapterView.AdapterContextMenuInfo menuInfoAdapter = (AdapterView.AdapterContextMenuInfo)menuInfo;
-            menu.setHeaderTitle(rssFeeds.get(menuInfoAdapter.position).getTitle());
+            menu.setHeaderTitle(Feeds.getRssFeeds().get(menuInfoAdapter.position).getTitle());
             String[] menuItems = getResources().getStringArray(R.array.contextualMenu);
             for (int i = 0; i < menuItems.length; i++) {
                 menu.add(Menu.NONE, i, i, menuItems[i]);
@@ -243,15 +244,14 @@ public class CategoryViewActivity extends AppCompatActivity {
 
     private void removeFeed(int position) {
         rssFeedUrlList.remove(position);
-        rssFeeds.remove(position);
+        Feeds.getRssFeeds().remove(position);
 
         // Sauvegarde de la liste des flux RSS
         writeToFile(rssFeedUrlList, rssFeedListFileName);
     }
 
     private void onAsyncTaskFinished(final List<RssFeed> rssFeeds) {
-        this.rssFeeds = rssFeeds;
-        Feeds.setRssFeeds(rssFeeds); // TODO Feeds
+        Feeds.setRssFeeds(rssFeeds);
 
         // Mise à jour de la liste des flux RSS
         updateFeedsListView();
@@ -267,7 +267,7 @@ public class CategoryViewActivity extends AppCompatActivity {
      */
     private void updateFeedsListView() {
         synchronized (feeds_ListView.getAdapter()) {
-            ((FeedListAdapter) feeds_ListView.getAdapter()).setItems(rssFeeds);
+            ((FeedListAdapter) feeds_ListView.getAdapter()).setItems(Feeds.getRssFeeds());
         }
     }
 
@@ -290,8 +290,8 @@ public class CategoryViewActivity extends AppCompatActivity {
         }
     }
 
-    private void clearFile(String fileName) {
-        new File(fileName).delete();
+    private boolean clearFile(String fileName) {
+        return new File(fileName).delete();
     }
 
     /**
@@ -322,8 +322,8 @@ public class CategoryViewActivity extends AppCompatActivity {
         return rssFeedList;
     }
 
-    private boolean doesFileExist(String fileName) {
-        return getApplicationContext().getFileStreamPath(fileName).exists();
+    private boolean doesFileExistAndNotEmpty(String fileName) {
+        return getApplicationContext().getFileStreamPath(fileName).length() > 0;
     }
 
 

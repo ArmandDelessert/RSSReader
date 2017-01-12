@@ -32,4 +32,8 @@ class Feeds {
         return Feeds.rssFeeds;
     }
 
+    static void clearRssFeeds() {
+        Feeds.rssFeeds.clear();
+    }
+
 }
